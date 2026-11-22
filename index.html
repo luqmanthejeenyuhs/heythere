@@ -1,0 +1,615 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hey there.</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --background: #f7f3ee;
+            --paper: #fffdf9;
+            --text: #292421;
+            --muted: #8c827b;
+            --accent: #a65f68;
+            --border: #e9dfd7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--background);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            background: #e9d6d1;
+            filter: blur(100px);
+            opacity: 0.4;
+            top: -120px;
+            right: -120px;
+            pointer-events: none;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: #e8d9c8;
+            filter: blur(100px);
+            opacity: 0.3;
+            bottom: -120px;
+            left: -100px;
+            pointer-events: none;
+        }
+
+        .page {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            min-height: 100vh;
+            padding: 30px 20px 70px;
+        }
+
+        .topbar {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            color: var(--text);
+            letter-spacing: 0;
+            text-transform: lowercase;
+        }
+
+        .hero {
+            max-width: 680px;
+            margin: 110px auto 60px;
+            text-align: center;
+            animation: fadeUp 1.2s ease both;
+        }
+
+        .little-heart {
+            color: var(--accent);
+            font-size: 24px;
+            margin-bottom: 25px;
+            animation: heartbeat 2.5s infinite;
+        }
+
+        .eyebrow {
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 22px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            font-size: clamp(48px, 9vw, 86px);
+            line-height: 1.12;
+            letter-spacing: -2px;
+        }
+
+        h1 em {
+            color: var(--accent);
+            font-weight: 400;
+        }
+
+        .hero-description {
+            max-width: 390px;
+            margin: 25px auto 0;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.9;
+        }
+
+        .open-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 38px;
+            padding: 16px 27px;
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            background: var(--paper);
+            color: var(--text);
+            font-family: inherit;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px #29242108;
+        }
+
+        .open-button:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px #29242112;
+        }
+
+        .open-button span {
+            color: var(--accent);
+            font-size: 18px;
+        }
+
+        .letter-section {
+            max-width: 650px;
+            margin: 0 auto;
+            display: none;
+            animation: fadeUp 0.9s ease both;
+        }
+
+        .letter-section.visible {
+            display: block;
+        }
+
+        .letter {
+            background: var(--paper);
+            border: 1px solid var(--border);
+            padding: clamp(30px, 7vw, 70px);
+            box-shadow: 0 20px 80px #29242108;
+            position: relative;
+        }
+
+        .letter::before {
+            content: "";
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            right: 14px;
+            bottom: 14px;
+            border: 1px solid #e9dfd766;
+            pointer-events: none;
+        }
+
+        .letter-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .letter-date {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 35px;
+        }
+
+        .letter h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(28px, 5vw, 38px);
+            font-weight: 400;
+            margin-bottom: 30px;
+        }
+
+        .letter p {
+            font-size: 14px;
+            line-height: 2.1;
+            color: #625953;
+            margin-bottom: 23px;
+        }
+
+        .letter p strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .letter .highlight {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            line-height: 1.7;
+            font-style: italic;
+            color: var(--accent);
+            margin: 35px 0;
+        }
+
+        .letter .signoff {
+            font-family: 'Playfair Display', serif;
+            font-size: 21px;
+            line-height: 1.8;
+            color: var(--text);
+            margin-top: 40px;
+            margin-bottom: 0;
+        }
+
+        .signature {
+            display: block;
+            font-family: 'Playfair Display', serif;
+            font-size: 30px;
+            font-style: italic;
+            color: var(--accent);
+            margin-top: 12px;
+        }
+
+        .ending {
+            text-align: center;
+            max-width: 400px;
+            margin: 55px auto 0;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 2;
+        }
+
+        .ending .heart {
+            display: block;
+            color: var(--accent);
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 100px;
+            color: #b2a59c;
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .floating-heart {
+            position: fixed;
+            bottom: -30px;
+            color: var(--accent);
+            opacity: 0;
+            pointer-events: none;
+            animation: floatHeart 6s linear forwards;
+            z-index: 5;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.12);
+            }
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            15% {
+                opacity: 0.5;
+            }
+            85% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-110vh) rotate(35deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .page {
+                padding: 22px 16px 50px;
+            }
+
+            .hero {
+                margin-top: 95px;
+            }
+
+            .letter {
+                padding: 35px 27px;
+            }
+
+            .letter::before {
+                top: 8px;
+                left: 8px;
+                right: 8px;
+                bottom: 8px;
+            }
+
+            .letter p {
+                font-size: 13px;
+                line-height: 2;
+            }
+
+            .footer {
+                margin-top: 70px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation: none !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="page">
+
+        <header class="topbar">
+            <span class="logo">hey there.</span>
+            <span>a letter for you</span>
+        </header>
+
+        <section class="hero">
+
+            <div class="little-heart">♡</div>
+
+            <p class="eyebrow">there's something i need to say</p>
+
+            <h1>
+                hey<br>
+                <em>there.</em>
+            </h1>
+
+            <p class="hero-description">
+                I've been carrying a lot in my heart.
+                I don't really know how to say it,
+                but I need you to hear me.
+            </p>
+
+            <button class="open-button" id="openButton">
+                Read my letter <span>↗</span>
+            </button>
+
+        </section>
+
+        <section class="letter-section" id="letterSection">
+
+            <article class="letter">
+
+                <div class="letter-content">
+
+                    <p class="letter-date">something I've been meaning to tell you</p>
+
+                    <h2>Hey you,</h2>
+
+                    <p>
+                        I honestly don't even know where to begin.
+                        I've been trying to find the right words,
+                        but the truth is, there probably aren't any
+                        that can properly explain how I feel.
+                    </p>
+
+                    <p>
+                        <strong>I'm sorry.</strong>
+                        For the rage baits, for the times I've made
+                        you upset, for the things I've said and done
+                        that hurt you. I know I haven't always handled
+                        things the way I should have, and I'm genuinely
+                        sorry for that.
+                    </p>
+
+                    <p>
+                        The truth is, I've never loved anyone the way
+                        I'm in love with you. You're funny, you're fine,
+                        and there's something about you that I honestly
+                        can't explain. I have no idea how I fell for you
+                        like this, but here I am.
+                    </p>
+
+                    <p>
+                        And I think that's what scares me the most.
+                        <strong>I'm very afraid.</strong>
+                        Afraid because I feel like I don't deserve you.
+                        And I don't mean that in some dramatic way.
+                        I mean it when I look at my life and think about
+                        the kind of person you are.
+                    </p>
+
+                    <p>
+                        I can't even take you on a proper date without
+                        taking a hit financially. And honestly?
+                        It's worth it. Every single time.
+                    </p>
+
+                    <p>
+                        But then I come back home, naishi Umoja,
+                        Eastlands, and I look at you. I think about
+                        the places you deserve to experience, the things
+                        you deserve to do, and the life I wish I could
+                        give you.
+                    </p>
+
+                    <p>
+                        And eventually, I bring you here.
+                        A place with a bed, Wi-Fi and a soundbar.
+                        That's it.
+                    </p>
+
+                    <p>
+                        Damn.
+                    </p>
+
+                    <p>
+                        I know it might not seem like a big deal to you,
+                        but it is to me. I'm embarrassed of myself.
+                        I wish I could do more. I wish I could give you
+                        more. And sometimes I feel like I'm not enough
+                        for you.
+                    </p>
+
+                    <p>
+                        I know I can't promise you everything right now.
+                        But I wish you knew how much I wish I could.
+                        And I don't want you to think that I'm saying
+                        all this to make you feel sorry for me.
+                        I'm just finally being honest about something
+                        I've been too afraid to say.
+                    </p>
+
+                    <p class="highlight">
+                        The truth is, I've never been happier with
+                        anyone the way I've been with you.
+                    </p>
+
+                    <p>
+                        I miss you. I really do.
+                    </p>
+
+                    <p>
+                        I miss talking to you. I miss laughing with you.
+                        I miss the little things about us that I probably
+                        never told you I appreciated enough.
+                    </p>
+
+                    <p>
+                        And I understand if you don't ever want to talk
+                        to me again. I understand if you're done.
+                        That's valid, and I won't blame you for how
+                        you feel.
+                    </p>
+
+                    <p>
+                        I'm not writing this to ask you to forgive me
+                        or to make you feel like you have to come back.
+                        I just wanted to let this out.
+                        I wanted you to know how I feel, at least once,
+                        without hiding behind jokes or pretending
+                        that everything is okay.
+                    </p>
+
+                    <p>
+                        I'm sorry for the rage baits.
+                        I'm sorry for the things I got wrong.
+                        I'm sorry for not always showing you
+                        how much you mean to me.
+                    </p>
+
+                    <p>
+                        And I'm sorry if this is the last time
+                        you'll ever hear from me.
+                        I just want u to know ,I love you till the earth shatters, till the stars go dark and the universe forgets its own name. 
+                        And if there is anything left of me when all of that is gone, let it be the part that loved you. 
+                    </p>
+
+                    <p>
+                        I have no idea where life takes us from here, or whether this is the last time our paths will cross. But if there's one thing I'll never question, it's how happy you made me. You came into my life and somehow made even the most ordinary moments feel special. I'll carry those memories with me, wherever life takes me. And if nothing else, I'm glad it was you. I'm glad I got to know you, and even more glad I got to love you.
+                    </p>
+
+                    <p class="signoff">
+                        If this is goodbye(i hope it isnt), then I hope life is gentle with you.
+                        I hope you find every happiness your heart deserves,
+                        and I hope you never forget how special you are.
+                    
+                        <br><br>
+                    
+                        Thank you for being such a beautiful part of my life.
+                        I'll always be glad that our paths crossed.
+                    
+                        <span class="signature">
+                            Until then, kwaheri mpenzi. ♡
+                        </span>
+                    </p>
+
+                </div>
+
+            </article>
+
+            <div class="ending">
+                <span class="heart">♡</span>
+                No pressure to reply.<br>
+                I just needed you to know.
+            </div>
+
+        </section>
+
+        <footer class="footer">
+            hey there. &nbsp; · &nbsp; written from the heart
+        </footer>
+
+    </main>
+
+    <script>
+        const openButton = document.getElementById("openButton");
+        const letterSection = document.getElementById("letterSection");
+
+        openButton.addEventListener("click", function () {
+
+            letterSection.classList.add("visible");
+
+            openButton.textContent = "Letter opened ♡";
+            openButton.disabled = true;
+            openButton.style.opacity = "0.6";
+            openButton.style.cursor = "default";
+
+            letterSection.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        });
+
+        // Small floating hearts when the letter is opened
+        function createHeart() {
+
+            const heart = document.createElement("span");
+
+            heart.className = "floating-heart";
+            heart.textContent = "♡";
+
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.fontSize = (12 + Math.random() * 15) + "px";
+            heart.style.animationDuration = (5 + Math.random() * 4) + "s";
+
+            document.body.appendChild(heart);
+
+            setTimeout(function () {
+                heart.remove();
+            }, 9000);
+        }
+
+        openButton.addEventListener("click", function () {
+
+            for (let i = 0; i < 12; i++) {
+                setTimeout(createHeart, i * 250);
+            }
+
+        });
+    </script>
+
+</body>
+</html>
